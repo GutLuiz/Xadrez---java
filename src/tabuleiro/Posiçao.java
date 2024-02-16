@@ -35,7 +35,4 @@ public class Posiçao {
 		return linha + ", " + coluna;
 	}
 	
-	
-	
-	
 }

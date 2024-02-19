@@ -15,7 +15,7 @@ public class Ui {
 			}
 			System.out.println(); // para quebrar a linha
 		}
-		System.out.println("  a b  c d e f g h");
+		System.out.println("  a b c d e f g h");
 	}
 	// criando um metodo auxiliar para imprimir uma peça:
 	

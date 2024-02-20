@@ -11,7 +11,7 @@ public class PartidaDeXadrez {
 	// colocando a dimensao do xadrez na classe adequada, pois nessa classe tera as
 	// regras da partida!
 	public PartidaDeXadrez() {
-		board = new Board(9, 9);
+		board = new Board(8, 8);
 		initialSetup();
 	}
 
@@ -30,7 +30,7 @@ public class PartidaDeXadrez {
 	//Metodo para iniciar a partida colocando as peças no tabuleiro:
 	private void initialSetup() {
 		board.lugarPeça(new Torre(board,Cor.WHITE), new Posiçao(2, 1));
-		board.lugarPeça(new Rei(board, Cor.BLACK), new Posiçao(0,4));
+		board.lugarPeça(new Rei(board, Cor.BLACK), new Posiçao(1,4));
 		board.lugarPeça(new Rei(board, Cor.WHITE), new Posiçao(7,4));
 	}
 }

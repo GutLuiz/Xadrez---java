@@ -10,45 +10,66 @@ public class Board {
 	private int linhas;
 	private int colunas;
 	private Peça[][] peças;
-	
+
 	public Board(int linhas, int colunas) {
+		if (linhas < 1 || colunas < 1) { // exeçoes
+			throw new TabuleiroExeçao("ERRO criando tabuleiro, é necessario que tenha uma linha e uma coluna!");
+		}
 		this.linhas = linhas;
 		this.colunas = colunas;
-		this.peças = new Peça[linhas][colunas]; // A matriz de peças vai ser instanciada na quantidade de linhas e na quantidade de colunas. 
+		this.peças = new Peça[linhas][colunas]; // A matriz de peças vai ser instanciada na quantidade de linhas e na
+												// quantidade de colunas.
 	}
 
 	public int getLinhas() {
 		return linhas;
 	}
 
-	public void setLinhas(int linhas) {
-		this.linhas = linhas;
-	}
-
 	public int getColunas() {
 		return colunas;
 	}
 
-	public void setColunas(int colunas) {
-		this.colunas = colunas;
-	}
-	
 	// criando um metodo pra retornar uma peça dada uma linha e uma coluna:
-	
+
 	public Peça peças(int linhas, int colunas) {
+		if(!posiçaoExistente(linhas,colunas)) {
+			throw new TabuleiroExeçao("Posiçao nao esta no quadro");
+		}
 		return peças[linhas][colunas];
 	}
-	
+
 	// Retornando a peça pela posiçao:
 	public Peça peças(Posiçao posiçao) {
+		if(!posiçaoExistente(posiçao)) {
+			throw new TabuleiroExeçao("Posiçao nao esta no quadro");
+		}
 		return peças[posiçao.getLinha()][posiçao.getColuna()];
 	}
-	
-	// Nesse metodo voce vai ter que atribuir a peça que esta na posiçao da linha tal e da coluna tal a posiçao que veio no argumento:
+
+	// Nesse metodo voce vai ter que atribuir a peça que esta na posiçao da linha
+	// tal e da coluna tal a posiçao que veio no argumento:
 	public void lugarPeça(Peça peça, Posiçao posiçao) {
+		if(temUmaPeça(posiçao)) {
+			throw new TabuleiroExeçao("ja existe uma posiçao" + posiçao);
+		}
+		
 		peças[posiçao.getLinha()][posiçao.getColuna()] = peça;
 		peça.posiçao = posiçao; // agora ela n esta mas nula pq ja tem um argumento.
 	}
-	
-	
+
+	private boolean posiçaoExistente(int linha, int coluna) {
+		return linha >= 0 && linha < linhas && coluna >= 0 && coluna < colunas;
+	}
+
+	public boolean posiçaoExistente(Posiçao posiçao) {
+		return posiçaoExistente(posiçao.getLinha(), posiçao.getColuna());
+	}
+
+	public boolean temUmaPeça(Posiçao posiçao) {
+		if(!posiçaoExistente(posiçao)) {
+			throw new TabuleiroExeçao("Posiçao nao esta no quadro");
+		}
+		return peças(posiçao) != null;
+	}
+
 }

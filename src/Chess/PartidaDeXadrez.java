@@ -19,18 +19,21 @@ public class PartidaDeXadrez {
 	public PeçaDeXadrez[][] getPeças() {
 
 		PeçaDeXadrez[][] mat = new PeçaDeXadrez[board.getLinhas()][board.getColunas()];
-		for (int i = 1; i < board.getLinhas(); i++) {
-			for (int j = 1; j < board.getColunas(); j++) {
+		for (int i = 0; i < board.getLinhas(); i++) {
+			for (int j = 0; j < board.getColunas(); j++) {
 				mat[i][j] = (PeçaDeXadrez) board.peças(i, j);
 			}
 		}
 		return mat;
 	}
+	private void lugarDaNovaPeça(char coluna, int linha, PeçaDeXadrez peça) {
+		board.lugarPeça(peça, new XadrezPosiçao (coluna,linha).toPosiçao());
+	}
 	
 	//Metodo para iniciar a partida colocando as peças no tabuleiro:
 	private void initialSetup() {
-		board.lugarPeça(new Torre(board,Cor.WHITE), new Posiçao(2, 1));
-		board.lugarPeça(new Rei(board, Cor.BLACK), new Posiçao(1,4));
-		board.lugarPeça(new Rei(board, Cor.WHITE), new Posiçao(7,4));
+		lugarDaNovaPeça('b', 6, new Torre(board,Cor.WHITE));
+		lugarDaNovaPeça('e', 8, new Rei(board, Cor.BLACK));
+		lugarDaNovaPeça('e', 1, new Rei(board, Cor.WHITE) );
 	}
 }

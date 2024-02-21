@@ -32,8 +32,18 @@ public class PartidaDeXadrez {
 	
 	//Metodo para iniciar a partida colocando as peças no tabuleiro:
 	private void initialSetup() {
-		lugarDaNovaPeça('b', 6, new Torre(board,Cor.WHITE));
-		lugarDaNovaPeça('e', 8, new Rei(board, Cor.BLACK));
-		lugarDaNovaPeça('e', 1, new Rei(board, Cor.WHITE) );
+		 lugarDaNovaPeça('c', 1, new Torre(board, Cor.WHITE));
+		 lugarDaNovaPeça('c', 2, new Torre(board, Cor.WHITE));
+		 lugarDaNovaPeça('d', 2, new Torre(board, Cor.WHITE));
+		 lugarDaNovaPeça('e', 2, new Torre(board, Cor.WHITE));
+		 lugarDaNovaPeça('e', 1, new Torre(board, Cor.WHITE));
+		 lugarDaNovaPeça('d', 1, new Rei(board, Cor.WHITE));
+
+		 lugarDaNovaPeça('c', 7, new Torre(board, Cor.BLACK));
+		 lugarDaNovaPeça('c', 8, new Torre(board, Cor.BLACK));
+		 lugarDaNovaPeça('d', 7, new Torre(board, Cor.BLACK));
+		 lugarDaNovaPeça('e', 7, new Torre(board, Cor.BLACK));
+		 lugarDaNovaPeça('e', 8, new Torre(board, Cor.BLACK));
+		 lugarDaNovaPeça('d', 8, new Rei(board, Cor.BLACK));
 	}
 }

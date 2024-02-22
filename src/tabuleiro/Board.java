@@ -39,9 +39,9 @@ public class Board {
 	}
 
 	// Retornando a peça pela posiçao:
-	public Peça peças(Posiçao posiçao) {
+	public Peça peça(Posiçao posiçao) {
 		if(!posiçaoExistente(posiçao)) {
-			throw new TabuleiroExeçao("Posiçao nao esta no quadro");
+			throw new TabuleiroExeçao("Posiçao nao esta no tabuleiro");
 		}
 		return peças[posiçao.getLinha()][posiçao.getColuna()];
 	}
@@ -56,6 +56,19 @@ public class Board {
 		peças[posiçao.getLinha()][posiçao.getColuna()] = peça;
 		peça.posiçao = posiçao; // agora ela n esta mas nula pq ja tem um argumento.
 	}
+	
+	public Peça RemoverPeça(Posiçao posiçao) {
+		if(!posiçaoExistente(posiçao)) {
+			throw new TabuleiroExeçao("Posiçao nao esta no tabuleiro");
+		}
+		if(peça(posiçao) == null ) {
+			return null;
+		}
+		Peça aux = peça(posiçao);
+		aux.posiçao = null; // Essa peça nao tem mais posiçao
+		peças[posiçao.getLinha()][posiçao.getColuna()] = null;
+		return aux;
+	}
 
 	private boolean posiçaoExistente(int linha, int coluna) {
 		return linha >= 0 && linha < linhas && coluna >= 0 && coluna < colunas;
@@ -69,7 +82,7 @@ public class Board {
 		if(!posiçaoExistente(posiçao)) {
 			throw new TabuleiroExeçao("Posiçao nao esta no quadro");
 		}
-		return peças(posiçao) != null;
+		return peça(posiçao) != null;
 	}
 
 }

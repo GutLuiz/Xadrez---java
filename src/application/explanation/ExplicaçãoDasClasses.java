@@ -12,6 +12,7 @@ public class ExplicaçãoDasClasses {
 		= No construtotr tambem é possivel observar que a matriz peças vai ser instanciada pela quantidade de linhas e na quantidads de colunas se passar da verificação.
 		= Ha tambem um metodo que retorna uma peça em uma determinada posição do tabuleiro, indentificada pelas coordenadas (linhas e colunas), esse metodo permite acessar e retornar a peça localizada em uma posição especifica.
 		= Existe tambem uma sobrecarga do metodo anterior, mas desssa vez ele recebe um objeto do tipo "Posição" em vez de coordenadas individuais.
+		= Ha outro metodo que tem a funçao de remover uma peça, nele antes de tudo tem a verificaçao defensiva mostrando se tem nao alguma posiçao existente é pra mostrar um exceçao, em seguida eu faço um outro if mostrando uma peça na determinada posiçao for nulo era pra simplismente retornar nulo, mas se isso nao acontecer eu faço o procedimento da retirada da peça do tabuleiro, depois e so colocar tudo em nulo que indica que nao tem mais peça na posiçao especificada pela matriz.
 		= Ha  outro metodo que tem a funçao de colocar uma peça em uma determinada posição do tabuleiro.
 		= Ha outro metodo que verifica uma posição (nas coordenadas linha e coluna) esta dentros dos limites do tabuleiro.
 		= Ha outro metodo que verifica se a posição dada por um objeto esta dentro dos limites do tabuleiro.

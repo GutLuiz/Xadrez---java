@@ -1,7 +1,11 @@
 package application;
 
+import java.util.InputMismatchException;
+import java.util.Scanner;
+
 import Chess.Cor;
 import Chess.PeçaDeXadrez;
+import Chess.XadrezPosiçao;
 
 //criando um metodo para imprimir um tabuleiro do formato que eu quero.
 
@@ -25,6 +29,21 @@ public class Ui {
 	public static final String ANSI_PURPLE_BACKGROUND = "\u001B[45m";
 	public static final String ANSI_CYAN_BACKGROUND = "\u001B[46m";
 	public static final String ANSI_WHITE_BACKGROUND = "\u001B[47m";
+	
+	
+	public static XadrezPosiçao lerXadrezPosiçao(Scanner sc) {
+		try {
+			// ler a coluna e a linha:
+			
+			String s = sc.nextLine();
+			char coluna = s.charAt(0);
+			int linha = Integer.parseInt(s.substring(1));
+			return new XadrezPosiçao(coluna,linha);
+		}
+		catch(RuntimeException e) {
+			throw new InputMismatchException("Error em adicionar a posição. valido ate a1 a h8");
+		}
+	}
 
 	public static void printTabuleiro(PeçaDeXadrez[][] peças) {
 		for (int i = 0; i < peças.length; i++) {

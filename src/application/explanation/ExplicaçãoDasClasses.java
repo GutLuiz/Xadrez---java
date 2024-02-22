@@ -21,5 +21,7 @@ public class ExplicaçãoDasClasses {
 		= Tem uma declaração privada de uma variavel board (da classe Board)
 		= No construtor da classe ele recebe um parameto do tipo Board que é o tabueleiro que a peça pertencera.
 		= E tem um get do board que é protected pq somente a classe e a sub classe do mesmo pacote pode acessar o tabuleiro de uma peça. 
-
+		
+		classe COR: 
+		= Declaração das cores do projeto (Branco, Preto)
 }

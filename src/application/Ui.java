@@ -41,7 +41,7 @@ public class Ui {
 			return new XadrezPosiçao(coluna,linha);
 		}
 		catch(RuntimeException e) {
-			throw new InputMismatchException("Error em adicionar a posição. valido ate a1 a h8");
+			throw new InputMismatchException("Error em adicionar a posicao. valido ate a1 a h8");
 		}
 	}
 

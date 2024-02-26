@@ -13,7 +13,7 @@ public class Board {
 
 	public Board(int linhas, int colunas) {
 		if (linhas < 1 || colunas < 1) { // exeçoes
-			throw new TabuleiroExeçao("ERRO criando tabuleiro, é necessario que tenha uma linha e uma coluna!");
+			throw new TabuleiroExeçao("ERRO criando tabuleiro, e necessario que tenha uma linha e uma coluna!");
 		}
 		this.linhas = linhas;
 		this.colunas = colunas;
@@ -41,7 +41,7 @@ public class Board {
 	// Retornando a peça pela posiçao:
 	public Peça peça(Posiçao posiçao) {
 		if(!posiçaoExistente(posiçao)) {
-			throw new TabuleiroExeçao("Posiçao nao esta no tabuleiro");
+			throw new TabuleiroExeçao("Posicao nao esta no tabuleiro");
 		}
 		return peças[posiçao.getLinha()][posiçao.getColuna()];
 	}
@@ -50,7 +50,7 @@ public class Board {
 	// tal e da coluna tal a posiçao que veio no argumento:
 	public void lugarPeça(Peça peça, Posiçao posiçao) {
 		if(temUmaPeça(posiçao)) {
-			throw new TabuleiroExeçao("ja existe uma posiçao" + posiçao);
+			throw new TabuleiroExeçao("ja existe uma posicao" + posiçao);
 		}
 		
 		peças[posiçao.getLinha()][posiçao.getColuna()] = peça;
@@ -59,7 +59,7 @@ public class Board {
 	
 	public Peça RemoverPeça(Posiçao posiçao) {
 		if(!posiçaoExistente(posiçao)) {
-			throw new TabuleiroExeçao("Posiçao nao esta no tabuleiro");
+			throw new TabuleiroExeçao("Posicao nao esta no tabuleiro");
 		}
 		if(peça(posiçao) == null ) {
 			return null;
@@ -80,7 +80,7 @@ public class Board {
 
 	public boolean temUmaPeça(Posiçao posiçao) {
 		if(!posiçaoExistente(posiçao)) {
-			throw new TabuleiroExeçao("Posiçao nao esta no quadro");
+			throw new TabuleiroExeçao("Posicao nao esta no quadro");
 		}
 		return peça(posiçao) != null;
 	}

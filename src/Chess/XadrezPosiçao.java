@@ -12,7 +12,7 @@ public class XadrezPosiçao {
 		// Colocando um if pra saber se passa no padrao do tabuleiro:
 
 		if (coluna < 'a' || coluna > 'h' || linha < 1 || linha > 8) {
-			throw new XadrezExceçao("Erro de instanciar a posiçao do xadrez. Valido valores de ate a1 a h8!");
+			throw new XadrezExceçao("Erro de instanciar a posicao do xadrez. Valido valores de ate a1 a h8!");
 		}
 
 		this.coluna = coluna;

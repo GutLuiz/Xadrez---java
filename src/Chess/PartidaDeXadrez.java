@@ -40,7 +40,7 @@ public class PartidaDeXadrez {
 	}
 
 	private void validaçaoDaPosiçaoFonte(Posiçao posiçao) {
-		if (!board.temUmaPeça(posiçao)) {
+		if (board.peça(posiçao) == null) {
 			throw new XadrezExceçao("Não existe uma peça na posiçao de origem ");
 		}
 	}

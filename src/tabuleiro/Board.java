@@ -33,7 +33,7 @@ public class Board {
 
 	public Peça peças(int linhas, int colunas) {
 		if(!posiçaoExistente(linhas,colunas)) {
-			throw new TabuleiroExeçao("Posiçao nao esta no quadro");
+			throw new TabuleiroExeçao("Posicao nao esta no quadro");
 		}
 		return peças[linhas][colunas];
 	}

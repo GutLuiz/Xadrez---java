@@ -30,6 +30,14 @@ public class Ui {
 	public static final String ANSI_CYAN_BACKGROUND = "\u001B[46m";
 	public static final String ANSI_WHITE_BACKGROUND = "\u001B[47m";
 	
+	// codigo para limpar a tela no prompt:
+	public static void limparTela() {
+		System.out.print("\033[H\033[2J");
+		System.out.flush();
+	}
+	
+	
+	
 	
 	public static XadrezPosiçao lerXadrezPosiçao(Scanner sc) {
 		try {

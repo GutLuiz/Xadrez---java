@@ -23,6 +23,16 @@ public class ExplicaçãoDasClasses {
 		= No construtor da classe ele recebe um parameto do tipo Board que é o tabueleiro que a peça pertencera.
 		= E tem um get do board que é protected pq somente a classe e a sub classe do mesmo pacote pode acessar o tabuleiro de uma peça. 
 		
+		classe Posiçao:
+		=Tem duas declaraçoes privadas int e coluna.
+		=Tem seu construtor e seus gets e sets
+		=Tem um metodo toString para imprimir a posiçao no terminal
+		
+		classe TabuleiroExceçao:
+		= Nessa classe extenda um RuntimeException pra que qualquer tipo de exceçao tenha uma mensagem.
+		= Tem um construtor com um parametro de msg do tipo String e um super recebendo essa msg.
+
+		
 		classe COR: 
 		= Declaração das cores do projeto (Branco, Preto)
 }

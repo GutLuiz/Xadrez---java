@@ -14,4 +14,10 @@ public class Torre extends PeçaDeXadrez {
 	public String toString() {
 		return "R";
 	}
+	
+	@Override
+	public boolean[][] possivelMovimentos() {
+		boolean [][] mat = new boolean[getBoard().getLinhas()][getBoard().getColunas()];
+		return mat;
+	}
 }

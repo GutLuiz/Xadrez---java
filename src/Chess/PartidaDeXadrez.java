@@ -43,6 +43,9 @@ public class PartidaDeXadrez {
 		if (board.peça(posiçao) == null) {
 			throw new XadrezExceçao("Não existe uma peça na posiçao de origem ");
 		}
+		if(board.peça(posiçao).existeMovimentoPossivel() == false) {
+			throw new XadrezExceçao("Nao existe possibilidade de movimentacao da peca");
+		}
 	}
 
 	private Peça fazerMover(Posiçao fonte, Posiçao destino) {

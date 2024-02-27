@@ -15,4 +15,9 @@ public class Rei extends PeçaDeXadrez{
 		return "K";
 	}
 
+	@Override
+	public boolean[][] possivelMovimentos() {
+		boolean [][] mat = new boolean[getBoard().getLinhas()][getBoard().getColunas()];
+		return mat;
+	}
 }

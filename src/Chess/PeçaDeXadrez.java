@@ -3,7 +3,7 @@ package Chess;
 import tabuleiro.Board;
 import tabuleiro.Peça;
 
-public class PeçaDeXadrez extends Peça {
+public abstract class PeçaDeXadrez extends Peça {
 	private Cor cor;
 
 	// Deixando apenas o get para que ninguem possa modificar a cor. Somente

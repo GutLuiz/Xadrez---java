@@ -5,7 +5,8 @@ public class ExplicaçãoDasClasses {
 	/*
 	
 					--------> EXPLICAÇÕES DE CADA CLASSE NO PROJETO: <-------
-
+		
+		PACOTE TABULEIRO:
 		classe BOARD:
 		= tem declaraçoes de variaveis, int coluna e linha e tambem tem a variavel Peça (da classe Peça) que é uma matriz de objetos do tipo "Peça".
 		= No construtor dessa classe tem um IF, nessa condiçao de verificaçao que esta sendo usada para garantir que o tabuleiro seja criado com dimensões validas.
@@ -36,7 +37,12 @@ public class ExplicaçãoDasClasses {
 		= Nessa classe extenda um RuntimeException pra que qualquer tipo de exceçao tenha uma mensagem.
 		= Tem um construtor com um parametro de msg do tipo String e um super recebendo essa msg.
 
-		
+		//PACOTE CHESS:
 		classe COR: 
 		= Declaração das cores do projeto (Branco, Preto)
-}
+		
+		classe PeçaDeXadrez:
+		= ela é uma classe abstrata que se extende a classe Peça(do pacote tabuleiro)
+		= tem uma declaraçao de uma variavel privada da classe Cor chamada cor
+		= tem somente seu getCor, para que ninguem possa modificar a cor, somente acessada.
+		= tem um construtor com parametros, Board board (do pacote tabuleiro) e Cor cor, com o super da classe board.

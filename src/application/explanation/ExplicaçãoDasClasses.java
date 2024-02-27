@@ -46,3 +46,4 @@ public class ExplicaçãoDasClasses {
 		= tem uma declaraçao de uma variavel privada da classe Cor chamada cor
 		= tem somente seu getCor, para que ninguem possa modificar a cor, somente acessada.
 		= tem um construtor com parametros, Board board (do pacote tabuleiro) e Cor cor, com o super da classe board.
+		= tem um metodo existeUmOponente, para saber se tem um oponente na direçao da peça, com isso ele faz uma variavel p que é feito um downcasting da peça (com um parametro da posiçao), depois ele retorna uma peça que se nao é nula e que seja de cor diferente da mesma, sendo assim adversaria.

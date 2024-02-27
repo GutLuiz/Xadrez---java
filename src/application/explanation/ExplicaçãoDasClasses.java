@@ -22,6 +22,10 @@ public class ExplicaçãoDasClasses {
 		= Tem uma declaração privada de uma variavel board (da classe Board)
 		= No construtor da classe ele recebe um parameto do tipo Board que é o tabueleiro que a peça pertencera.
 		= E tem um get do board que é protected pq somente a classe e a sub classe do mesmo pacote pode acessar o tabuleiro de uma peça. 
+		= Tem um metodo abstrato (com isso a classe fica abstrata tambem) boleano sobre os posiveis movimentos de uma peça com uma matriz
+		= Tem um outro metodo que é concreto que utiliza esse metodo abastrato que retorna os possiveis movimentos na matriz (linha e coluna)
+		= Tem o ultimo metodo que é pra testar se existe um movimento possivel que se passar do FOR retorna o verdeiro para programa.
+				
 		
 		classe Posiçao:
 		=Tem duas declaraçoes privadas int e coluna.

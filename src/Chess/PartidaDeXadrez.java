@@ -35,6 +35,7 @@ public class PartidaDeXadrez {
 
 		// fazendo uma operaçao para validar a posiçao de origem:
 		validaçaoDaPosiçaoFonte(fonte);
+		validaçaoDaPosiçaoDestino(fonte,destino);
 		Peça peçaCapturada = fazerMover(fonte, destino);
 		return (PeçaDeXadrez) peçaCapturada; // fazendo um downcasting pois a peçaCapturada era do tipo Peça.
 	}
@@ -45,6 +46,12 @@ public class PartidaDeXadrez {
 		}
 		if(board.peça(posiçao).existeMovimentoPossivel() == false) {
 			throw new XadrezExceçao("Nao existe possibilidade de movimentacao da peca");
+		}
+	}
+	
+	private void validaçaoDaPosiçaoDestino(Posiçao fonte, Posiçao destino) {
+		if(!board.peça(fonte).possivelMovimento(destino)) { // se pra peça de origem a posiçao de destino n for um movimento possivel, singnifica que eu n posso mexer pra la.
+			throw new XadrezExceçao("Essa peca nao pode se mover para la.");
 		}
 	}
 

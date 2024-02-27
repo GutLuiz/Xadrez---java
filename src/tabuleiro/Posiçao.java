@@ -28,6 +28,11 @@ public class Posiçao {
 	public void setColuna(int coluna) {
 		this.coluna = coluna;
 	}
+	public void setValores(int linha, int coluna) {
+		this.linha = linha;
+		this.coluna = coluna;
+	}
+	
 	
 	//Criando um toString para imprimir a posição no terminal.
 	@Override

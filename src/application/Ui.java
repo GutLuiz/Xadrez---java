@@ -36,9 +36,6 @@ public class Ui {
 		System.out.flush();
 	}
 	
-	
-	
-	
 	public static XadrezPosiçao lerXadrezPosiçao(Scanner sc) {
 		try {
 			// ler a coluna e a linha:
@@ -57,7 +54,18 @@ public class Ui {
 		for (int i = 0; i < peças.length; i++) {
 			System.out.print(8 - i + " ");
 			for (int j = 0; j < peças.length; j++) {
-				printPeça(peças[i][j]);
+				printPeça(peças[i][j], false);
+			}
+			System.out.println(); // para quebrar a linha
+		}
+		System.out.println("  a b c d e f g h");
+	}
+	// sobrecarba do tabbuleiro (para colocar cores nos possiveis movimentos):
+	public static void printTabuleiro(PeçaDeXadrez[][] peças, boolean[][] possivelMovimentos) {
+		for (int i = 0; i < peças.length; i++) {
+			System.out.print(8 - i + " ");
+			for (int j = 0; j < peças.length; j++) {
+				printPeça(peças[i][j], possivelMovimentos[i][j]);
 			}
 			System.out.println(); // para quebrar a linha
 		}
@@ -65,9 +73,12 @@ public class Ui {
 	}
 	// criando um metodo auxiliar para imprimir uma peça:
 
-	private static void printPeça(PeçaDeXadrez piece) {
+	private static void printPeça(PeçaDeXadrez piece, boolean background) {
+		if(background) {
+			System.out.print( ANSI_BLUE_BACKGROUND);
+		}
     	if (piece == null) {
-            System.out.print("-");
+            System.out.print("-" + ANSI_RESET);
         }
         else {
             if (piece.getCor() == Cor.WHITE) {

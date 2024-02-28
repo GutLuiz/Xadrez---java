@@ -21,12 +21,17 @@ public class Program {
 				System.out.print("Fonte: ");
 				XadrezPosiçao fonte = Ui.lerXadrezPosiçao(sc);
 				
+				boolean[][] possivelMovimentos = partidadexadrez.possivelMovimentos(fonte);
+				Ui.limparTela();
+				Ui.printTabuleiro(partidadexadrez.getPeças(),possivelMovimentos);		
+				
 				System.out.println();
 				
 				System.out.print("Destino: ");
 				XadrezPosiçao destino = Ui.lerXadrezPosiçao(sc);
 				
 				PeçaDeXadrez peçaCap = partidadexadrez.MovimentoXadrez(fonte, destino);
+				
 				
 		
 			}

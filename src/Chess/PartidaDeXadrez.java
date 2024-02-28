@@ -27,6 +27,12 @@ public class PartidaDeXadrez {
 		}
 		return mat;
 	}
+	
+	//metodo para imprimir as posiçoes possiveis a partir de uma posiçao de origem:
+	public boolean[][] possivelMovimentos(XadrezPosiçao posiçaoFonte){
+		Posiçao posiçao = posiçaoFonte.toPosiçao();
+		return board.peça(posiçao).possivelMovimentos();
+	}
 
 	public PeçaDeXadrez MovimentoXadrez(XadrezPosiçao posiçaoFonte, XadrezPosiçao posiçaoDestino) {
 		// covertando as duas posições para posições da matriz:

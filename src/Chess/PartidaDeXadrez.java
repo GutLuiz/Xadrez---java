@@ -8,12 +8,24 @@ import tabuleiro.Posiçao;
 
 public class PartidaDeXadrez {
 	private Board board;
+	private int turno;
+	private Cor jogadorVez;
 
 	// colocando a dimensao do xadrez na classe adequada, pois nessa classe tera as
 	// regras da partida!
 	public PartidaDeXadrez() {
 		board = new Board(8, 8);
+		turno = 1;
+		jogadorVez = Cor.WHITE;
 		initialSetup();
+	}
+	
+	public int getTurno() {
+		return turno;
+	}
+	
+	public Cor getJogadorVez() {
+		return jogadorVez;
 	}
 
 	// fazendo um metodo para retornar um matriz correspondente a essa partida:
@@ -31,6 +43,7 @@ public class PartidaDeXadrez {
 	//metodo para imprimir as posiçoes possiveis a partir de uma posiçao de origem:
 	public boolean[][] possivelMovimentos(XadrezPosiçao posiçaoFonte){
 		Posiçao posiçao = posiçaoFonte.toPosiçao();
+		validaçaoDaPosiçaoFonte(posiçao);
 		return board.peça(posiçao).possivelMovimentos();
 	}
 
@@ -38,17 +51,20 @@ public class PartidaDeXadrez {
 		// covertando as duas posições para posições da matriz:
 		Posiçao fonte = posiçaoFonte.toPosiçao();
 		Posiçao destino = posiçaoDestino.toPosiçao();
-
-		// fazendo uma operaçao para validar a posiçao de origem:
-		validaçaoDaPosiçaoFonte(fonte);
+		validaçaoDaPosiçaoFonte(fonte); // fazendo uma operaçao para validar a posiçao de origem:
 		validaçaoDaPosiçaoDestino(fonte,destino);
 		Peça peçaCapturada = fazerMover(fonte, destino);
+		ProximoTurno();
 		return (PeçaDeXadrez) peçaCapturada; // fazendo um downcasting pois a peçaCapturada era do tipo Peça.
 	}
 
 	private void validaçaoDaPosiçaoFonte(Posiçao posiçao) {
 		if (board.peça(posiçao) == null) {
 			throw new XadrezExceçao("Não existe uma peça na posiçao de origem ");
+		}
+		if(jogadorVez != ((PeçaDeXadrez)board.peça(posiçao)).getCor()){
+			throw new XadrezExceçao("A peca escolhida nao e sua.");
+			
 		}
 		if(board.peça(posiçao).existeMovimentoPossivel() == false) {
 			throw new XadrezExceçao("Nao existe possibilidade de movimentacao da peca");
@@ -66,6 +82,11 @@ public class PartidaDeXadrez {
 		Peça peçaCapturada = board.RemoverPeça(destino);
 		board.lugarPeça(p, destino);
 		return peçaCapturada;
+	}
+	
+	private void ProximoTurno() {
+		turno++;
+		jogadorVez = (jogadorVez == Cor.WHITE ) ? Cor.BLACK : Cor.WHITE;
 	}
 
 	private void lugarDaNovaPeça(char coluna, int linha, PeçaDeXadrez peça) {

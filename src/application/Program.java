@@ -16,7 +16,7 @@ public class Program {
 		while(true) {
 			try {
 				Ui.limparTela();
-				Ui.printTabuleiro(partidadexadrez.getPeças());
+				Ui.printDoJogo(partidadexadrez);
 				System.out.println();
 				System.out.print("Fonte: ");
 				XadrezPosiçao fonte = Ui.lerXadrezPosiçao(sc);
@@ -32,8 +32,6 @@ public class Program {
 				
 				PeçaDeXadrez peçaCap = partidadexadrez.MovimentoXadrez(fonte, destino);
 				
-				
-		
 			}
 			catch(XadrezExceçao e){
 				System.out.println(e.getMessage());

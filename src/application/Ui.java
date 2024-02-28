@@ -4,6 +4,7 @@ import java.util.InputMismatchException;
 import java.util.Scanner;
 
 import Chess.Cor;
+import Chess.PartidaDeXadrez;
 import Chess.PeçaDeXadrez;
 import Chess.XadrezPosiçao;
 
@@ -48,6 +49,13 @@ public class Ui {
 		catch(RuntimeException e) {
 			throw new InputMismatchException("Error em adicionar a posicao. valido ate a1 a h8");
 		}
+	}
+	
+	public static void printDoJogo(PartidaDeXadrez partida) {
+		printTabuleiro(partida.getPeças());
+		System.out.println();
+		System.out.println("Turno: " + partida.getTurno());
+		System.out.println("Esperando jogador: " + partida.getJogadorVez());
 	}
 
 	public static void printTabuleiro(PeçaDeXadrez[][] peças) {

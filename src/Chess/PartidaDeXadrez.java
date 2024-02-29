@@ -1,5 +1,8 @@
 package Chess;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import Chess.peças.Rei;
 import Chess.peças.Torre;
 import tabuleiro.Board;
@@ -10,6 +13,9 @@ public class PartidaDeXadrez {
 	private Board board;
 	private int turno;
 	private Cor jogadorVez;
+	
+	private List<Peça> peçasDoTabuleiro = new ArrayList<>(); // lista que controla as peças que estão no tabuleiro
+	private List<Peça> peçasCapturadas = new ArrayList<>(); // lista que controla as peças que ja foram capturadas
 
 	// colocando a dimensao do xadrez na classe adequada, pois nessa classe tera as
 	// regras da partida!
@@ -81,6 +87,11 @@ public class PartidaDeXadrez {
 		Peça p = board.RemoverPeça(fonte);
 		Peça peçaCapturada = board.RemoverPeça(destino);
 		board.lugarPeça(p, destino);
+		
+		if(peçaCapturada != null) {
+			peçasDoTabuleiro.remove(peçaCapturada);
+			peçasCapturadas.add(peçaCapturada);
+		}
 		return peçaCapturada;
 	}
 	
@@ -91,6 +102,7 @@ public class PartidaDeXadrez {
 
 	private void lugarDaNovaPeça(char coluna, int linha, PeçaDeXadrez peça) {
 		board.lugarPeça(peça, new XadrezPosiçao(coluna, linha).toPosiçao());
+		peçasDoTabuleiro.add(peça);
 	}
 
 	// Metodo para iniciar a partida colocando as peças no tabuleiro:

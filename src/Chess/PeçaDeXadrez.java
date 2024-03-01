@@ -17,6 +17,9 @@ public abstract class PeçaDeXadrez extends Peça {
 		super(board);
 		this.cor = cor;
 	}
+	public XadrezPosiçao getXadrezPosiçao() {
+		return XadrezPosiçao.LugarDaPosiçao(posiçao);
+	}
 	
 	protected boolean existeUmOponente(Posiçao posiçao) {
 		PeçaDeXadrez p = (PeçaDeXadrez)getBoard().peça(posiçao);

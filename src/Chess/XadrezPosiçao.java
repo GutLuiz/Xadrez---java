@@ -32,7 +32,7 @@ public class XadrezPosiçao {
 	}
 	
 	protected static XadrezPosiçao LugarDaPosiçao(Posiçao posiçao) {
-		return new XadrezPosiçao((char) ('a' - posiçao.getColuna()), 8 - posiçao.getLinha());
+		return new XadrezPosiçao((char) ('a' + posiçao.getColuna()), 8 - posiçao.getLinha());
 	}
 	@Override 
 	public String toString(){

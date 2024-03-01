@@ -2,6 +2,7 @@ package Chess;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
 
 import Chess.peças.Rei;
 import Chess.peças.Torre;
@@ -13,7 +14,8 @@ public class PartidaDeXadrez {
 	private Board board;
 	private int turno;
 	private Cor jogadorVez;
-	
+	private boolean check;
+
 	private List<Peça> peçasDoTabuleiro = new ArrayList<>(); // lista que controla as peças que estão no tabuleiro
 	private List<Peça> peçasCapturadas = new ArrayList<>(); // lista que controla as peças que ja foram capturadas
 
@@ -25,13 +27,17 @@ public class PartidaDeXadrez {
 		jogadorVez = Cor.WHITE;
 		initialSetup();
 	}
-	
+
 	public int getTurno() {
 		return turno;
 	}
-	
+
 	public Cor getJogadorVez() {
 		return jogadorVez;
+	}
+	
+	public boolean getCheck() {
+		return check;
 	}
 
 	// fazendo um metodo para retornar um matriz correspondente a essa partida:
@@ -45,21 +51,32 @@ public class PartidaDeXadrez {
 		}
 		return mat;
 	}
-	
-	//metodo para imprimir as posiçoes possiveis a partir de uma posiçao de origem:
-	public boolean[][] possivelMovimentos(XadrezPosiçao posiçaoFonte){
+
+	// metodo para imprimir as posiçoes possiveis a partir de uma posiçao de origem:
+	public boolean[][] possivelMovimentos(XadrezPosiçao posiçaoFonte) {
 		Posiçao posiçao = posiçaoFonte.toPosiçao();
 		validaçaoDaPosiçaoFonte(posiçao);
 		return board.peça(posiçao).possivelMovimentos();
 	}
 
-	public PeçaDeXadrez MovimentoXadrez(XadrezPosiçao posiçaoFonte, XadrezPosiçao posiçaoDestino) {
+	public PeçaDeXadrez MovimentoXadrez(XadrezPosiçao posiçaoFonte, XadrezPosiçao posiçaoDestino)  {
 		// covertando as duas posições para posições da matriz:
 		Posiçao fonte = posiçaoFonte.toPosiçao();
 		Posiçao destino = posiçaoDestino.toPosiçao();
 		validaçaoDaPosiçaoFonte(fonte); // fazendo uma operaçao para validar a posiçao de origem:
-		validaçaoDaPosiçaoDestino(fonte,destino);
+		validaçaoDaPosiçaoDestino(fonte, destino);
 		Peça peçaCapturada = fazerMover(fonte, destino);
+		// teste se o proprio jogador se colocou em check:
+		
+		if(TesteCheck(jogadorVez)) {
+			DesfazerMovimento(fonte, destino, peçaCapturada);
+			throw new XadrezExceçao("Voce nao pode se colocar em check");
+		}
+		
+		check = (TesteCheck(oponente(jogadorVez))) ? true : false;
+		
+		
+		
 		ProximoTurno();
 		return (PeçaDeXadrez) peçaCapturada; // fazendo um downcasting pois a peçaCapturada era do tipo Peça.
 	}
@@ -68,17 +85,19 @@ public class PartidaDeXadrez {
 		if (board.peça(posiçao) == null) {
 			throw new XadrezExceçao("Não existe uma peça na posiçao de origem ");
 		}
-		if(jogadorVez != ((PeçaDeXadrez)board.peça(posiçao)).getCor()){
+		if (jogadorVez != ((PeçaDeXadrez) board.peça(posiçao)).getCor()) {
 			throw new XadrezExceçao("A peca escolhida nao e sua.");
-			
+
 		}
-		if(board.peça(posiçao).existeMovimentoPossivel() == false) {
+		if (board.peça(posiçao).existeMovimentoPossivel() == false) {
 			throw new XadrezExceçao("Nao existe possibilidade de movimentacao da peca");
 		}
 	}
-	
+
 	private void validaçaoDaPosiçaoDestino(Posiçao fonte, Posiçao destino) {
-		if(!board.peça(fonte).possivelMovimento(destino)) { // se pra peça de origem a posiçao de destino n for um movimento possivel, singnifica que eu n posso mexer pra la.
+		if (!board.peça(fonte).possivelMovimento(destino)) { // se pra peça de origem a posiçao de destino n for um
+																// movimento possivel, singnifica que eu n posso mexer
+																// pra la.
 			throw new XadrezExceçao("Essa peca nao pode se mover para la.");
 		}
 	}
@@ -87,17 +106,59 @@ public class PartidaDeXadrez {
 		Peça p = board.RemoverPeça(fonte);
 		Peça peçaCapturada = board.RemoverPeça(destino);
 		board.lugarPeça(p, destino);
-		
-		if(peçaCapturada != null) {
+
+		if (peçaCapturada != null) {
 			peçasDoTabuleiro.remove(peçaCapturada);
 			peçasCapturadas.add(peçaCapturada);
 		}
 		return peçaCapturada;
 	}
-	
+
+	// metodo para desfazer o movimento, pois o jogador nao pode fazer um movimento
+	// que deixa o rei exposto ao check
+	private void DesfazerMovimento(Posiçao fonte, Posiçao destino, Peça peçaCapturada) {
+		Peça p = board.RemoverPeça(destino);
+		board.lugarPeça(p, fonte);
+
+		if (peçaCapturada != null) {
+			board.lugarPeça(peçaCapturada, destino);
+			peçasCapturadas.remove(peçaCapturada);
+			peçasDoTabuleiro.add(peçaCapturada);
+
+		}
+	}
+
 	private void ProximoTurno() {
 		turno++;
-		jogadorVez = (jogadorVez == Cor.WHITE ) ? Cor.BLACK : Cor.WHITE;
+		jogadorVez = (jogadorVez == Cor.WHITE) ? Cor.BLACK : Cor.WHITE;
+	}
+
+	private Cor oponente(Cor cor) {
+		return (cor == Cor.WHITE) ? Cor.BLACK : Cor.WHITE;
+	}
+
+	private PeçaDeXadrez Rei(Cor cor) {
+		List<Peça> list = peçasDoTabuleiro.stream().filter(x -> ((PeçaDeXadrez) x).getCor() == cor).collect(Collectors.toList());
+				
+		for (Peça p : list) {
+			if (p instanceof Rei) {
+				return (PeçaDeXadrez) p;
+			}
+		}
+		throw new RuntimeException("Nao existe o rei da " + cor + " no tabuleiro");
+	}
+	// Metodo para o check:
+	private boolean TesteCheck(Cor cor) {
+		Posiçao posiçaoDoRei = Rei(cor).getXadrezPosiçao().toPosiçao();
+		List<Peça> peçasDoOponente =  peçasDoTabuleiro.stream().filter(x -> ((PeçaDeXadrez) x).getCor() == oponente(cor)).collect(Collectors.toList());
+		for(Peça p : peçasDoOponente) {
+			boolean [][] mat = p.possivelMovimentos();
+			if(mat[posiçaoDoRei.getLinha()][posiçaoDoRei.getColuna()]) {
+				return true;
+			}
+		}
+		return false;
+		
 	}
 
 	private void lugarDaNovaPeça(char coluna, int linha, PeçaDeXadrez peça) {

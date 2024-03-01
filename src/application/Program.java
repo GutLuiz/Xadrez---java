@@ -39,7 +39,7 @@ public class Program {
 					capturadas.add(peçaCap);
 				}
 				
-			}
+				}
 			catch(XadrezExceçao e){
 				System.out.println(e.getMessage());
 				sc.nextLine();

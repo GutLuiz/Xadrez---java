@@ -15,6 +15,7 @@ public class PartidaDeXadrez {
 	private int turno;
 	private Cor jogadorVez;
 	private boolean check;
+	private boolean checkMate;
 
 	private List<Peça> peçasDoTabuleiro = new ArrayList<>(); // lista que controla as peças que estão no tabuleiro
 	private List<Peça> peçasCapturadas = new ArrayList<>(); // lista que controla as peças que ja foram capturadas
@@ -38,6 +39,9 @@ public class PartidaDeXadrez {
 	
 	public boolean getCheck() {
 		return check;
+	}
+	public boolean getCheckMate() {
+		return checkMate;
 	}
 
 	// fazendo um metodo para retornar um matriz correspondente a essa partida:
@@ -75,9 +79,13 @@ public class PartidaDeXadrez {
 		
 		check = (TesteCheck(oponente(jogadorVez))) ? true : false;
 		
+		// Teste se o jogador esta em checkMate:
+		if(TesteCheckMate(oponente(jogadorVez))) {
+			checkMate = true;
+		}else {
+			ProximoTurno();
+		}
 		
-		
-		ProximoTurno();
 		return (PeçaDeXadrez) peçaCapturada; // fazendo um downcasting pois a peçaCapturada era do tipo Peça.
 	}
 
@@ -160,7 +168,34 @@ public class PartidaDeXadrez {
 		return false;
 		
 	}
-
+	
+	private boolean TesteCheckMate(Cor cor) {
+		if(!TesteCheck(cor)) {
+			return false;
+		}
+		List<Peça> list = peçasDoTabuleiro.stream().filter(x -> ((PeçaDeXadrez) x).getCor() == cor).collect(Collectors.toList());
+		for(Peça p : list) {
+			boolean [][] mat = p.possivelMovimentos();
+			// se ele encontrar algum movimento que tire do check retornar falso se nao retonar o verdadeiro depois do for.
+			for(int i = 0 ; i < board.getLinhas(); i++) {
+				for(int j = 0 ; j < board.getColunas(); j ++) {
+					if(mat[i][j]) {
+						Posiçao fonte = ((PeçaDeXadrez)p).getXadrezPosiçao().toPosiçao();
+						Posiçao destino = new Posiçao(i,j);
+						Peça peçacap = fazerMover(fonte,destino);
+						boolean testeCheck = TesteCheck(cor);
+						DesfazerMovimento(fonte,destino,peçacap);
+						if(!testeCheck) {
+							return false;
+						}
+					}
+				}
+			}
+		}
+		return true;
+	}
+	
+	
 	private void lugarDaNovaPeça(char coluna, int linha, PeçaDeXadrez peça) {
 		board.lugarPeça(peça, new XadrezPosiçao(coluna, linha).toPosiçao());
 		peçasDoTabuleiro.add(peça);
@@ -168,18 +203,13 @@ public class PartidaDeXadrez {
 
 	// Metodo para iniciar a partida colocando as peças no tabuleiro:
 	private void initialSetup() {
-		lugarDaNovaPeça('c', 1, new Torre(board, Cor.WHITE));
-		lugarDaNovaPeça('c', 2, new Torre(board, Cor.WHITE));
-		lugarDaNovaPeça('d', 2, new Torre(board, Cor.WHITE));
-		lugarDaNovaPeça('e', 2, new Torre(board, Cor.WHITE));
-		lugarDaNovaPeça('e', 1, new Torre(board, Cor.WHITE));
-		lugarDaNovaPeça('d', 1, new Rei(board, Cor.WHITE));
+		
+		lugarDaNovaPeça('h', 7, new Torre(board, Cor.WHITE));
+		lugarDaNovaPeça('d', 1, new Torre(board, Cor.WHITE));
+		lugarDaNovaPeça('e', 1, new Rei(board, Cor.WHITE));
 
-		lugarDaNovaPeça('c', 7, new Torre(board, Cor.BLACK));
-		lugarDaNovaPeça('c', 8, new Torre(board, Cor.BLACK));
-		lugarDaNovaPeça('d', 7, new Torre(board, Cor.BLACK));
-		lugarDaNovaPeça('e', 7, new Torre(board, Cor.BLACK));
-		lugarDaNovaPeça('e', 8, new Torre(board, Cor.BLACK));
-		lugarDaNovaPeça('d', 8, new Rei(board, Cor.BLACK));
+		lugarDaNovaPeça('b', 8, new Torre(board, Cor.BLACK));
+		lugarDaNovaPeça('a', 8, new Rei(board, Cor.BLACK));
+
 	}
 }

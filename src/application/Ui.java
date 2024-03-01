@@ -14,7 +14,7 @@ import Chess.XadrezPosiçao;
 //criando um metodo para imprimir um tabuleiro do formato que eu quero.
 
 public class Ui {
-	//cores do texto:
+	// cores do texto:
 	public static final String ANSI_RESET = "\u001B[0m";
 	public static final String ANSI_BLACK = "\u001B[30m";
 	public static final String ANSI_RED = "\u001B[31m";
@@ -33,35 +33,40 @@ public class Ui {
 	public static final String ANSI_PURPLE_BACKGROUND = "\u001B[45m";
 	public static final String ANSI_CYAN_BACKGROUND = "\u001B[46m";
 	public static final String ANSI_WHITE_BACKGROUND = "\u001B[47m";
-	
+
 	// codigo para limpar a tela no prompt:
 	public static void limparTela() {
 		System.out.print("\033[H\033[2J");
 		System.out.flush();
 	}
-	
+
 	public static XadrezPosiçao lerXadrezPosiçao(Scanner sc) {
 		try {
 			// ler a coluna e a linha:
-			
+
 			String s = sc.nextLine();
 			char coluna = s.charAt(0);
 			int linha = Integer.parseInt(s.substring(1));
-			return new XadrezPosiçao(coluna,linha);
-		}
-		catch(RuntimeException e) {
+			return new XadrezPosiçao(coluna, linha);
+		} catch (RuntimeException e) {
 			throw new InputMismatchException("Error em adicionar a posicao. valido ate a1 a h8");
 		}
 	}
-	
+
 	public static void printDoJogo(PartidaDeXadrez partida, List<PeçaDeXadrez> capturadas) {
 		printTabuleiro(partida.getPeças());
 		printDasPeçasCapturadas(capturadas);
 		System.out.println();
 		System.out.println("Turno: " + partida.getTurno());
-		System.out.println("Esperando jogador: " + partida.getJogadorVez());
-		if(partida.getCheck()) {
-			System.out.println("CHECK!");
+		if (!partida.getCheckMate()) {
+			System.out.println("Esperando jogador: " + partida.getJogadorVez());
+			if (partida.getCheck()) {
+				System.out.println("CHECK!");
+			}
+		}
+		else {
+			System.out.println("CHECKMATE!");
+			System.out.println("Vencedor: " + partida.getJogadorVez());
 		}
 	}
 
@@ -75,6 +80,7 @@ public class Ui {
 		}
 		System.out.println("  a b c d e f g h");
 	}
+
 	// sobrecarba do tabbuleiro (para colocar cores nos possiveis movimentos):
 	public static void printTabuleiro(PeçaDeXadrez[][] peças, boolean[][] possivelMovimentos) {
 		for (int i = 0; i < peças.length; i++) {
@@ -89,36 +95,36 @@ public class Ui {
 	// criando um metodo auxiliar para imprimir uma peça:
 
 	private static void printPeça(PeçaDeXadrez piece, boolean background) {
-		if(background) {
-			System.out.print( ANSI_BLUE_BACKGROUND);
+		if (background) {
+			System.out.print(ANSI_BLUE_BACKGROUND);
 		}
-    	if (piece == null) {
-            System.out.print("-" + ANSI_RESET);
-        }
-        else {
-            if (piece.getCor() == Cor.WHITE) {
-                System.out.print(ANSI_WHITE + piece + ANSI_RESET);
-            }
-            else {
-                System.out.print(ANSI_YELLOW + piece + ANSI_RESET);
-            }
-        }
-        System.out.print(" ");
+		if (piece == null) {
+			System.out.print("-" + ANSI_RESET);
+		} else {
+			if (piece.getCor() == Cor.WHITE) {
+				System.out.print(ANSI_WHITE + piece + ANSI_RESET);
+			} else {
+				System.out.print(ANSI_YELLOW + piece + ANSI_RESET);
+			}
+		}
+		System.out.print(" ");
 	}
-	
+
 	private static void printDasPeçasCapturadas(List<PeçaDeXadrez> capturada) {
-		List<PeçaDeXadrez> branca = capturada.stream().filter(x -> x.getCor() == Cor.WHITE).collect(Collectors.toList()); // filtrando a lista
-		List<PeçaDeXadrez> preto = capturada.stream().filter(x -> x.getCor() == Cor.BLACK).collect(Collectors.toList()); // filtrando a lista
+		List<PeçaDeXadrez> branca = capturada.stream().filter(x -> x.getCor() == Cor.WHITE)
+				.collect(Collectors.toList()); // filtrando a lista
+		List<PeçaDeXadrez> preto = capturada.stream().filter(x -> x.getCor() == Cor.BLACK).collect(Collectors.toList()); // filtrando
+																															// a
+																															// lista
 		System.out.println("Pecas caputradas: ");
 		System.out.print("Brancas: ");
 		System.out.print(ANSI_WHITE);
-		System.out.println(Arrays.toString(branca.toArray())); //Imprimindo um array de valores
+		System.out.println(Arrays.toString(branca.toArray())); // Imprimindo um array de valores
 		System.out.print(ANSI_RESET);
 		System.out.print("Preto: ");
 		System.out.print(ANSI_YELLOW);
 		System.out.println(Arrays.toString(preto.toArray()));
 		System.out.print(ANSI_RESET);
-		
-		
+
 	}
 }

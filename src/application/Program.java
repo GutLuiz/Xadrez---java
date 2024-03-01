@@ -16,7 +16,7 @@ public class Program {
 		Scanner sc = new Scanner(System.in);
 		PartidaDeXadrez partidadexadrez = new PartidaDeXadrez();
 		List<PeçaDeXadrez> capturadas = new ArrayList<>();
-		while(true) {
+		while(!partidadexadrez.getCheckMate()) {
 			try {
 				Ui.limparTela();
 				Ui.printDoJogo(partidadexadrez, capturadas);
@@ -50,7 +50,8 @@ public class Program {
 			}
 			
 		}
-		
+		Ui.limparTela();
+		Ui.printDoJogo(partidadexadrez, capturadas);
 		
 	}
 

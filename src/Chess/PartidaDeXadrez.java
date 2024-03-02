@@ -111,7 +111,8 @@ public class PartidaDeXadrez {
 	}
 
 	private Peça fazerMover(Posiçao fonte, Posiçao destino) {
-		Peça p = board.RemoverPeça(fonte);
+		PeçaDeXadrez p = (PeçaDeXadrez)board.RemoverPeça(fonte);
+		p.AumentarContador();
 		Peça peçaCapturada = board.RemoverPeça(destino);
 		board.lugarPeça(p, destino);
 
@@ -125,7 +126,8 @@ public class PartidaDeXadrez {
 	// metodo para desfazer o movimento, pois o jogador nao pode fazer um movimento
 	// que deixa o rei exposto ao check
 	private void DesfazerMovimento(Posiçao fonte, Posiçao destino, Peça peçaCapturada) {
-		Peça p = board.RemoverPeça(destino);
+		PeçaDeXadrez p = (PeçaDeXadrez)board.RemoverPeça(destino);
+		p.DiminuirContador();
 		board.lugarPeça(p, fonte);
 
 		if (peçaCapturada != null) {

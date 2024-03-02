@@ -6,6 +6,7 @@ import tabuleiro.Posiçao;
 
 public abstract class PeçaDeXadrez extends Peça {
 	private Cor cor;
+	private int contadorDeMovimento;
 
 	// Deixando apenas o get para que ninguem possa modificar a cor. Somente
 	// acessada
@@ -17,6 +18,18 @@ public abstract class PeçaDeXadrez extends Peça {
 		super(board);
 		this.cor = cor;
 	}
+	
+	public int getContadorDeMovimento() {
+		return contadorDeMovimento;
+	}
+	
+	public void AumentarContador() {
+		contadorDeMovimento ++;
+	}
+	public void DiminuirContador() {
+		contadorDeMovimento --;
+	}
+	
 	public XadrezPosiçao getXadrezPosiçao() {
 		return XadrezPosiçao.LugarDaPosiçao(posiçao);
 	}

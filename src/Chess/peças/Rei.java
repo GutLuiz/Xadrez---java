@@ -13,7 +13,7 @@ public class Rei extends PeçaDeXadrez {
 
 	@Override
 	public String toString() {
-		return "K";
+		return "R";
 	}
 
 	// metodo auxiliar:

@@ -13,7 +13,7 @@ public class Torre extends PeçaDeXadrez {
 
 	@Override
 	public String toString() {
-		return "R";
+		return "T";
 	}
 	
 	@Override
@@ -72,4 +72,5 @@ public class Torre extends PeçaDeXadrez {
 		
 		return mat;
 	}
+	
 }

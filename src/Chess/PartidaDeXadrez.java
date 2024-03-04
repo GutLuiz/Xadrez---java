@@ -7,6 +7,7 @@ import java.util.stream.Collectors;
 import Chess.peças.Bispo;
 import Chess.peças.Cavalo;
 import Chess.peças.Peao;
+import Chess.peças.Rainha;
 import Chess.peças.Rei;
 import Chess.peças.Torre;
 import tabuleiro.Board;
@@ -214,41 +215,39 @@ public class PartidaDeXadrez {
 	// Metodo para iniciar a partida colocando as peças no tabuleiro:
 	private void initialSetup() {
 
-		lugarDaNovaPeça('a', 1, new Torre(board,Cor.WHITE));
-		lugarDaNovaPeça('b', 1, new Cavalo(board,Cor.WHITE));
-		lugarDaNovaPeça('c', 1, new Bispo(board,Cor.WHITE));
-		lugarDaNovaPeça('e', 1, new Rei(board,Cor.WHITE));
-		lugarDaNovaPeça('f', 1, new Bispo(board,Cor.WHITE));
-		lugarDaNovaPeça('g', 1, new Cavalo(board,Cor.WHITE));
-		lugarDaNovaPeça('h', 1, new Torre(board,Cor.WHITE));
-		lugarDaNovaPeça('a', 2, new Peao(board,Cor.WHITE));
-		lugarDaNovaPeça('b', 2, new Peao(board,Cor.WHITE));
-		lugarDaNovaPeça('c', 2, new Peao(board,Cor.WHITE));
-		lugarDaNovaPeça('d', 2, new Peao(board,Cor.WHITE));
-		lugarDaNovaPeça('e', 2, new Peao(board,Cor.WHITE));
-		lugarDaNovaPeça('f', 2, new Peao(board,Cor.WHITE));
-		lugarDaNovaPeça('g', 2, new Peao(board,Cor.WHITE));
-		lugarDaNovaPeça('h', 2, new Peao(board,Cor.WHITE));
-		
-		
-		lugarDaNovaPeça('a', 8, new Torre(board,Cor.BLACK));
-		lugarDaNovaPeça('b', 8, new Cavalo(board,Cor.BLACK));
-		lugarDaNovaPeça('c', 8, new Bispo(board,Cor.BLACK));
-		lugarDaNovaPeça('e', 8, new Rei(board,Cor.BLACK));
-		lugarDaNovaPeça('f', 8, new Bispo(board,Cor.BLACK));
-		lugarDaNovaPeça('g', 8, new Cavalo(board,Cor.BLACK));
-		lugarDaNovaPeça('h', 8, new Torre(board,Cor.BLACK));
-		lugarDaNovaPeça('a', 7, new Peao(board,Cor.BLACK));
-		lugarDaNovaPeça('b', 7, new Peao(board,Cor.BLACK));
-		lugarDaNovaPeça('c', 7, new Peao(board,Cor.BLACK));
-		lugarDaNovaPeça('d', 7, new Peao(board,Cor.BLACK));
-		lugarDaNovaPeça('e', 7, new Peao(board,Cor.BLACK));
-		lugarDaNovaPeça('f', 7, new Peao(board,Cor.BLACK));
-		lugarDaNovaPeça('g', 7, new Peao(board,Cor.BLACK));
-		lugarDaNovaPeça('h', 7, new Peao(board,Cor.BLACK));
-		
-		
-		
-		
+		lugarDaNovaPeça('a', 1, new Torre(board, Cor.WHITE));
+		lugarDaNovaPeça('b', 1, new Cavalo(board, Cor.WHITE));
+		lugarDaNovaPeça('c', 1, new Bispo(board, Cor.WHITE));
+		lugarDaNovaPeça('d', 1, new Rainha(board, Cor.WHITE));
+		lugarDaNovaPeça('e', 1, new Rei(board, Cor.WHITE));
+		lugarDaNovaPeça('f', 1, new Bispo(board, Cor.WHITE));
+		lugarDaNovaPeça('g', 1, new Cavalo(board, Cor.WHITE));
+		lugarDaNovaPeça('h', 1, new Torre(board, Cor.WHITE));
+		lugarDaNovaPeça('a', 2, new Peao(board, Cor.WHITE));
+		lugarDaNovaPeça('b', 2, new Peao(board, Cor.WHITE));
+		lugarDaNovaPeça('c', 2, new Peao(board, Cor.WHITE));
+		lugarDaNovaPeça('d', 2, new Peao(board, Cor.WHITE));
+		lugarDaNovaPeça('e', 2, new Peao(board, Cor.WHITE));
+		lugarDaNovaPeça('f', 2, new Peao(board, Cor.WHITE));
+		lugarDaNovaPeça('g', 2, new Peao(board, Cor.WHITE));
+		lugarDaNovaPeça('h', 2, new Peao(board, Cor.WHITE));
+
+		lugarDaNovaPeça('a', 8, new Torre(board, Cor.BLACK));
+		lugarDaNovaPeça('b', 8, new Cavalo(board, Cor.BLACK));
+		lugarDaNovaPeça('c', 8, new Bispo(board, Cor.BLACK));
+		lugarDaNovaPeça('d', 8, new Rainha(board, Cor.BLACK));
+		lugarDaNovaPeça('e', 8, new Rei(board, Cor.BLACK));
+		lugarDaNovaPeça('f', 8, new Bispo(board, Cor.BLACK));
+		lugarDaNovaPeça('g', 8, new Cavalo(board, Cor.BLACK));
+		lugarDaNovaPeça('h', 8, new Torre(board, Cor.BLACK));
+		lugarDaNovaPeça('a', 7, new Peao(board, Cor.BLACK));
+		lugarDaNovaPeça('b', 7, new Peao(board, Cor.BLACK));
+		lugarDaNovaPeça('c', 7, new Peao(board, Cor.BLACK));
+		lugarDaNovaPeça('d', 7, new Peao(board, Cor.BLACK));
+		lugarDaNovaPeça('e', 7, new Peao(board, Cor.BLACK));
+		lugarDaNovaPeça('f', 7, new Peao(board, Cor.BLACK));
+		lugarDaNovaPeça('g', 7, new Peao(board, Cor.BLACK));
+		lugarDaNovaPeça('h', 7, new Peao(board, Cor.BLACK));
+
 	}
 }

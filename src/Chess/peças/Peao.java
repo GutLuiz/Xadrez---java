@@ -25,7 +25,7 @@ public class Peao extends PeçaDeXadrez {
 			}
 			p.setValores(posiçao.getLinha() - 2 , posiçao.getColuna());
 			Posiçao p2 = new Posiçao (posiçao.getLinha() - 1 , posiçao.getColuna());
-			if (getBoard().posiçaoExistente(p) && !getBoard().temUmaPeça(p) && getBoard().posiçaoExistente(p2) && !getBoard().temUmaPeça(p) && getContadorDeMovimento() == 0) {
+			if (getBoard().posiçaoExistente(p) && !getBoard().temUmaPeça(p) && getBoard().posiçaoExistente(p2) && !getBoard().temUmaPeça(p)  && getContadorDeMovimento() == 0) {
 				mat[p.getLinha()][p.getColuna()] = true;
 			}
 			p.setValores(posiçao.getLinha() - 1 , posiçao.getColuna() - 1);

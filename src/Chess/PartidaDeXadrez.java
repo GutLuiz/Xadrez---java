@@ -125,6 +125,24 @@ public class PartidaDeXadrez {
 			peçasDoTabuleiro.remove(peçaCapturada);
 			peçasCapturadas.add(peçaCapturada);
 		}
+		// especial movimento torre pequena:
+		if (p instanceof Rei && destino.getColuna() == fonte.getColuna() + 2) {
+			Posiçao fonteT = new Posiçao(destino.getLinha(), fonte.getColuna() + 3);
+			Posiçao destinoT = new Posiçao(destino.getLinha(), fonte.getColuna() + 1);
+			PeçaDeXadrez torre = (PeçaDeXadrez) board.RemoverPeça(fonteT);
+			board.lugarPeça(torre, destinoT);
+			torre.AumentarContador();
+		}
+
+		// especial movimento torre grande:
+		if (p instanceof Rei && destino.getColuna() == fonte.getColuna() - 2) {
+			Posiçao fonteT = new Posiçao(destino.getLinha(), fonte.getColuna() - 4);
+			Posiçao destinoT = new Posiçao(destino.getLinha(), fonte.getColuna() - 1);
+			PeçaDeXadrez torre = (PeçaDeXadrez) board.RemoverPeça(fonteT);
+			board.lugarPeça(torre, destinoT);
+			torre.AumentarContador();
+		}
+
 		return peçaCapturada;
 	}
 
@@ -140,6 +158,23 @@ public class PartidaDeXadrez {
 			peçasCapturadas.remove(peçaCapturada);
 			peçasDoTabuleiro.add(peçaCapturada);
 
+		}
+		// especial movimento torre pequena:
+		if (p instanceof Rei && destino.getColuna() == fonte.getColuna() + 2) {
+			Posiçao fonteT = new Posiçao(destino.getLinha(), destino.getColuna() + 3);
+			Posiçao destinoT = new Posiçao(destino.getLinha(), destino.getColuna() + 1);
+			PeçaDeXadrez torre = (PeçaDeXadrez) board.RemoverPeça(destinoT);
+			board.lugarPeça(torre, fonteT);
+			torre.DiminuirContador();
+		}
+
+		// especial movimento torre grande:
+		if (p instanceof Rei && destino.getColuna() == fonte.getColuna() - 2) {
+			Posiçao fonteT = new Posiçao(destino.getLinha(), destino.getColuna() - 4);
+			Posiçao destinoT = new Posiçao(destino.getLinha(), destino.getColuna() - 1);
+			PeçaDeXadrez torre = (PeçaDeXadrez) board.RemoverPeça(destinoT);
+			board.lugarPeça(torre, fonteT);
+			torre.DiminuirContador();
 		}
 	}
 
@@ -219,7 +254,7 @@ public class PartidaDeXadrez {
 		lugarDaNovaPeça('b', 1, new Cavalo(board, Cor.WHITE));
 		lugarDaNovaPeça('c', 1, new Bispo(board, Cor.WHITE));
 		lugarDaNovaPeça('d', 1, new Rainha(board, Cor.WHITE));
-		lugarDaNovaPeça('e', 1, new Rei(board, Cor.WHITE));
+		lugarDaNovaPeça('e', 1, new Rei(board, Cor.WHITE, this));
 		lugarDaNovaPeça('f', 1, new Bispo(board, Cor.WHITE));
 		lugarDaNovaPeça('g', 1, new Cavalo(board, Cor.WHITE));
 		lugarDaNovaPeça('h', 1, new Torre(board, Cor.WHITE));
@@ -236,7 +271,7 @@ public class PartidaDeXadrez {
 		lugarDaNovaPeça('b', 8, new Cavalo(board, Cor.BLACK));
 		lugarDaNovaPeça('c', 8, new Bispo(board, Cor.BLACK));
 		lugarDaNovaPeça('d', 8, new Rainha(board, Cor.BLACK));
-		lugarDaNovaPeça('e', 8, new Rei(board, Cor.BLACK));
+		lugarDaNovaPeça('e', 8, new Rei(board, Cor.BLACK, this));
 		lugarDaNovaPeça('f', 8, new Bispo(board, Cor.BLACK));
 		lugarDaNovaPeça('g', 8, new Cavalo(board, Cor.BLACK));
 		lugarDaNovaPeça('h', 8, new Torre(board, Cor.BLACK));

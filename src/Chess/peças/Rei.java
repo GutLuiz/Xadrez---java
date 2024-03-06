@@ -1,14 +1,17 @@
 package Chess.peças;
 
 import Chess.Cor;
+import Chess.PartidaDeXadrez;
 import Chess.PeçaDeXadrez;
 import tabuleiro.Board;
 import tabuleiro.Posiçao;
 
 public class Rei extends PeçaDeXadrez {
-
-	public Rei(Board board, Cor cor) {
+	private PartidaDeXadrez partidadexadrez;
+	
+	public Rei(Board board, Cor cor , PartidaDeXadrez partidadexadrez) {
 		super(board, cor);
+		this.partidadexadrez = partidadexadrez;
 	}
 
 	@Override
@@ -20,6 +23,11 @@ public class Rei extends PeçaDeXadrez {
 	private boolean podeMover(Posiçao posiçao) {
 		PeçaDeXadrez p = (PeçaDeXadrez) getBoard().peça(posiçao);
 		return p == null || p.getCor() != getCor();
+	}
+	
+	private boolean testeTorreCast(Posiçao posiçao) {
+		PeçaDeXadrez p = (PeçaDeXadrez)getBoard().peça(posiçao);
+		return p != null && p instanceof Torre && p.getCor() == getCor() && p.getContadorDeMovimento() == 0;
 	}
 
 	@Override
@@ -72,6 +80,33 @@ public class Rei extends PeçaDeXadrez {
 		if (getBoard().posiçaoExistente(p) && podeMover(p)) {
 			mat[p.getLinha()][p.getColuna()] = true;
 		}
+		
+		// Movimento especial da torre pequena :
+		if(getContadorDeMovimento() == 0 && !partidadexadrez.getCheck()) {
+			// Se o rei esta do lado da torre;
+			Posiçao posT1 = new Posiçao(posiçao.getLinha(), posiçao.getColuna() + 3);
+			if(testeTorreCast(posT1)) {
+				Posiçao p1 =  new Posiçao(posiçao.getLinha(), posiçao.getColuna() + 1);
+				Posiçao p2 =  new Posiçao(posiçao.getLinha(), posiçao.getColuna() + 2);
+				if(getBoard().peça(p1) == null && getBoard().peça(p2) == null) {
+					mat[posiçao.getLinha()][posiçao.getColuna() + 2] = true;
+				}
+			}
+			
+			Posiçao posT2 = new Posiçao(posiçao.getLinha(), posiçao.getColuna() - 4);
+			if(testeTorreCast(posT2)) {
+				Posiçao p1 =  new Posiçao(posiçao.getLinha(), posiçao.getColuna() - 1);
+				Posiçao p2 =  new Posiçao(posiçao.getLinha(), posiçao.getColuna() - 2);
+				Posiçao p3 =  new Posiçao(posiçao.getLinha(), posiçao.getColuna() - 3);
+
+				if(getBoard().peça(p1) == null && getBoard().peça(p2) == null && getBoard().peça(p3) == null) {
+					mat[posiçao.getLinha()][posiçao.getColuna() - 2] = true;
+				}
+			}
+			
+		}
+		
+		
 		return mat;
 	}
 }

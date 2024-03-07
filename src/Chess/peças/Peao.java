@@ -46,7 +46,7 @@ public class Peao extends PeçaDeXadrez {
 				if(getBoard().posiçaoExistente(esquerda) && existeUmOponente(esquerda) && getBoard().peça(esquerda) == partidadexadrez.getEnPassantVulneravel()) {
 					mat[esquerda.getLinha() - 1][esquerda.getColuna()] = true;
 				}
-				Posiçao direita = new Posiçao(posiçao.getLinha(), posiçao.getColuna() - 1);
+				Posiçao direita = new Posiçao(posiçao.getLinha(), posiçao.getColuna() + 1);
 				if(getBoard().posiçaoExistente(direita) && existeUmOponente(direita) && getBoard().peça(direita) == partidadexadrez.getEnPassantVulneravel()) {
 					mat[direita.getLinha() - 1][direita.getColuna()] = true;
 				}
@@ -80,7 +80,7 @@ public class Peao extends PeçaDeXadrez {
 				if(getBoard().posiçaoExistente(esquerda) && existeUmOponente(esquerda) && getBoard().peça(esquerda) == partidadexadrez.getEnPassantVulneravel()) {
 					mat[esquerda.getLinha() + 1][esquerda.getColuna()] = true;
 				}
-				Posiçao direita = new Posiçao(posiçao.getLinha(), posiçao.getColuna() - 1);
+				Posiçao direita = new Posiçao(posiçao.getLinha(), posiçao.getColuna() + 1);
 				if(getBoard().posiçaoExistente(direita) && existeUmOponente(direita) && getBoard().peça(direita) == partidadexadrez.getEnPassantVulneravel()) {
 					mat[direita.getLinha() + 1][direita.getColuna()] = true;
 				}

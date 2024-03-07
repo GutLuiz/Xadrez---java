@@ -101,7 +101,7 @@ public class PartidaDeXadrez {
 		}
 		
 		// especial movimento en passant:
-		if(peçaMoveu instanceof Peao && (destino.getLinha() == fonte.getLinha() -2 || fonte.getLinha() == destino.getLinha() + 2)) {
+		if(peçaMoveu instanceof Peao && (destino.getLinha() == fonte.getLinha() -2 || destino.getLinha() ==fonte.getLinha() + 2)) {
 			enPassantVulneravel = peçaMoveu;
 		}
 		else {
@@ -159,6 +159,23 @@ public class PartidaDeXadrez {
 			board.lugarPeça(torre, destinoT);
 			torre.AumentarContador();
 		}
+		
+		// especial movimento en passant:
+		if( p instanceof Peao) {
+			if(fonte.getColuna() != destino.getColuna() && peçaCapturada == null) {
+				Posiçao peaoPosiçao;
+				if(p.getCor() == Cor.WHITE) {
+					peaoPosiçao = new Posiçao(destino.getLinha() + 1, destino.getColuna());
+				}
+				else {
+					peaoPosiçao = new Posiçao(destino.getLinha() - 1, destino.getColuna());
+				}
+				peçaCapturada = board.RemoverPeça(peaoPosiçao);
+				peçasCapturadas.add(peçaCapturada);
+				peçasDoTabuleiro.remove(peçaCapturada);
+			}
+		}
+		
 
 		return peçaCapturada;
 	}
@@ -193,6 +210,30 @@ public class PartidaDeXadrez {
 			board.lugarPeça(torre, fonteT);
 			torre.DiminuirContador();
 		}
+		// especial movimento torre grande:
+				if (p instanceof Rei && destino.getColuna() == fonte.getColuna() - 2) {
+					Posiçao fonteT = new Posiçao(destino.getLinha(), fonte.getColuna() - 4);
+					Posiçao destinoT = new Posiçao(destino.getLinha(), fonte.getColuna() - 1);
+					PeçaDeXadrez torre = (PeçaDeXadrez) board.RemoverPeça(fonteT);
+					board.lugarPeça(torre, destinoT);
+					torre.AumentarContador();
+				}
+				
+				// especial movimento en passant:
+				if( p instanceof Peao) {
+					if(fonte.getColuna() != destino.getColuna() && peçaCapturada == enPassantVulneravel) {
+						PeçaDeXadrez peao = (PeçaDeXadrez)board.RemoverPeça(destino);
+						Posiçao peaoPosiçao;
+						if(p.getCor() == Cor.WHITE) {
+							peaoPosiçao = new Posiçao(3, destino.getColuna());
+						}
+						else {
+							peaoPosiçao = new Posiçao(4, destino.getColuna());
+						}
+						board.lugarPeça(peao, peaoPosiçao);
+						
+					}
+				}
 	}
 
 	private void ProximoTurno() {

@@ -20,6 +20,7 @@ public class PartidaDeXadrez {
 	private Cor jogadorVez;
 	private boolean check;
 	private boolean checkMate;
+	private PeçaDeXadrez enPassantVulneravel;
 
 	private List<Peça> peçasDoTabuleiro = new ArrayList<>(); // lista que controla as peças que estão no tabuleiro
 	private List<Peça> peçasCapturadas = new ArrayList<>(); // lista que controla as peças que ja foram capturadas
@@ -48,7 +49,12 @@ public class PartidaDeXadrez {
 	public boolean getCheckMate() {
 		return checkMate;
 	}
-
+	
+	public PeçaDeXadrez getEnPassantVulneravel() {
+		return enPassantVulneravel;
+	}
+	
+	
 	// fazendo um metodo para retornar um matriz correspondente a essa partida:
 	public PeçaDeXadrez[][] getPeças() {
 
@@ -81,6 +87,9 @@ public class PartidaDeXadrez {
 			DesfazerMovimento(fonte, destino, peçaCapturada);
 			throw new XadrezExceçao("Voce nao pode se colocar em check");
 		}
+		
+		PeçaDeXadrez peçaMoveu = (PeçaDeXadrez)board.peça(destino);
+		
 
 		check = (TesteCheck(oponente(jogadorVez))) ? true : false;
 
@@ -89,6 +98,14 @@ public class PartidaDeXadrez {
 			checkMate = true;
 		} else {
 			ProximoTurno();
+		}
+		
+		// especial movimento en passant:
+		if(peçaMoveu instanceof Peao && (destino.getLinha() == fonte.getLinha() -2 || fonte.getLinha() == destino.getLinha() + 2)) {
+			enPassantVulneravel = peçaMoveu;
+		}
+		else {
+			enPassantVulneravel = null;
 		}
 
 		return (PeçaDeXadrez) peçaCapturada; // fazendo um downcasting pois a peçaCapturada era do tipo Peça.
@@ -258,14 +275,14 @@ public class PartidaDeXadrez {
 		lugarDaNovaPeça('f', 1, new Bispo(board, Cor.WHITE));
 		lugarDaNovaPeça('g', 1, new Cavalo(board, Cor.WHITE));
 		lugarDaNovaPeça('h', 1, new Torre(board, Cor.WHITE));
-		lugarDaNovaPeça('a', 2, new Peao(board, Cor.WHITE));
-		lugarDaNovaPeça('b', 2, new Peao(board, Cor.WHITE));
-		lugarDaNovaPeça('c', 2, new Peao(board, Cor.WHITE));
-		lugarDaNovaPeça('d', 2, new Peao(board, Cor.WHITE));
-		lugarDaNovaPeça('e', 2, new Peao(board, Cor.WHITE));
-		lugarDaNovaPeça('f', 2, new Peao(board, Cor.WHITE));
-		lugarDaNovaPeça('g', 2, new Peao(board, Cor.WHITE));
-		lugarDaNovaPeça('h', 2, new Peao(board, Cor.WHITE));
+		lugarDaNovaPeça('a', 2, new Peao(board, Cor.WHITE,this));
+		lugarDaNovaPeça('b', 2, new Peao(board, Cor.WHITE,this));
+		lugarDaNovaPeça('c', 2, new Peao(board, Cor.WHITE,this));
+		lugarDaNovaPeça('d', 2, new Peao(board, Cor.WHITE,this));
+		lugarDaNovaPeça('e', 2, new Peao(board, Cor.WHITE,this));
+		lugarDaNovaPeça('f', 2, new Peao(board, Cor.WHITE,this));
+		lugarDaNovaPeça('g', 2, new Peao(board, Cor.WHITE,this));
+		lugarDaNovaPeça('h', 2, new Peao(board, Cor.WHITE,this));
 
 		lugarDaNovaPeça('a', 8, new Torre(board, Cor.BLACK));
 		lugarDaNovaPeça('b', 8, new Cavalo(board, Cor.BLACK));
@@ -275,14 +292,14 @@ public class PartidaDeXadrez {
 		lugarDaNovaPeça('f', 8, new Bispo(board, Cor.BLACK));
 		lugarDaNovaPeça('g', 8, new Cavalo(board, Cor.BLACK));
 		lugarDaNovaPeça('h', 8, new Torre(board, Cor.BLACK));
-		lugarDaNovaPeça('a', 7, new Peao(board, Cor.BLACK));
-		lugarDaNovaPeça('b', 7, new Peao(board, Cor.BLACK));
-		lugarDaNovaPeça('c', 7, new Peao(board, Cor.BLACK));
-		lugarDaNovaPeça('d', 7, new Peao(board, Cor.BLACK));
-		lugarDaNovaPeça('e', 7, new Peao(board, Cor.BLACK));
-		lugarDaNovaPeça('f', 7, new Peao(board, Cor.BLACK));
-		lugarDaNovaPeça('g', 7, new Peao(board, Cor.BLACK));
-		lugarDaNovaPeça('h', 7, new Peao(board, Cor.BLACK));
+		lugarDaNovaPeça('a', 7, new Peao(board, Cor.BLACK,this));
+		lugarDaNovaPeça('b', 7, new Peao(board, Cor.BLACK,this));
+		lugarDaNovaPeça('c', 7, new Peao(board, Cor.BLACK,this));
+		lugarDaNovaPeça('d', 7, new Peao(board, Cor.BLACK,this));
+		lugarDaNovaPeça('e', 7, new Peao(board, Cor.BLACK,this));
+		lugarDaNovaPeça('f', 7, new Peao(board, Cor.BLACK,this));
+		lugarDaNovaPeça('g', 7, new Peao(board, Cor.BLACK,this));
+		lugarDaNovaPeça('h', 7, new Peao(board, Cor.BLACK,this));
 
 	}
 }

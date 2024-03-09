@@ -131,7 +131,7 @@ public class PartidaDeXadrez {
 			throw new IllegalStateException("nao tem peca para aser promovida");
 		}
 		if (!tipo.equals("B") && !tipo.equals("T") && !tipo.equals("C") && !tipo.equals("Q")) {
-			throw new InvalidParameterException("Tipo de promocao invalido");
+			return promoçao;
 		}
 
 		// removendo

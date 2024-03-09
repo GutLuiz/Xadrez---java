@@ -38,6 +38,11 @@ public class Program {
 				if(peçaCap != null) { // se a peça capturada for diferente de nulo, siginifica que tem uma peça capturada
 					capturadas.add(peçaCap);
 				}
+				if(partidadexadrez.getPromoçao() != null) {
+					System.out.println("Entre com a peça promovida (B/T/C/Q)");
+					String tipo = sc.nextLine();
+					partidadexadrez.trocarPeça(tipo);
+				}
 				
 				}
 			catch(XadrezExceçao e){

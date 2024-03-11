@@ -2,7 +2,7 @@ package application.explanation;
 
 public class ExplicaçãoDasClasses {
 
-	/*
+	
 	
 					--------> EXPLICAÇÕES DE CADA CLASSE NO PROJETO: <-------
 		
@@ -50,4 +50,13 @@ public class ExplicaçãoDasClasses {
 
 		Classe XadrezExceçao:
 		Nessa classe tem somente um String msg pra quando der qualquer exceçao ele mostra uma mensagem que voce colocou, vale lembrar tambem que ele é uma sub classe do TabuleiroExceçao
+		
+		Classe XadrezPosiçao:
+		Ela é responsavel por representar uma posiçao no tabuleiro de xadrez.
+		= Tem os atributos privados coluna e linha.
+		= Tem o construtor que recebe como parametro a coluna e a linha da posiçao no tabuleiro de xadrez.
+		= Antes de atribuir os valores aos atributos, o progroma verifica se os valores estao dentro dos limites validos do tabuleiro, caso ao contrario lança uma exceçao do tipo XadrezExceçao.
+		= Tem um metodo toPosiçao que converte a posiçao do tabuleiro de xadrez para a posiçao do tabuleiro padrao.
+		= Tem outro metodo lugarDaPosiçao que é estatico, retorna um objeto XadrezPosiçao a partir de uma posição do tabuleiro padrao
+		= E no final tem o ultimo metodo toString retorna uma representaçao em string da posiçao no formato "coluna + linha" (exemplo: a2 b7).
 		

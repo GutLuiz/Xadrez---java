@@ -4,9 +4,9 @@ public class ExplicaçãoDasClasses {
 
 	
 	
-					--------> EXPLICAÇÕES DE CADA CLASSE NO PROJETO: <-------
+					--------> EXPLICAÇÕES DE CADA CLASSE DO PROJETO: <-------
 		
-		PACOTE TABULEIRO:
+		//PACOTE TABULEIRO:
 		classe BOARD:
 		= tem declaraçoes de variaveis, int coluna e linha e tambem tem a variavel Peça (da classe Peça) que é uma matriz de objetos do tipo "Peça".
 		= No construtor dessa classe tem um IF, nessa condiçao de verificaçao que esta sendo usada para garantir que o tabuleiro seja criado com dimensões validas.
@@ -60,3 +60,32 @@ public class ExplicaçãoDasClasses {
 		= Tem outro metodo lugarDaPosiçao que é estatico, retorna um objeto XadrezPosiçao a partir de uma posição do tabuleiro padrao
 		= E no final tem o ultimo metodo toString retorna uma representaçao em string da posiçao no formato "coluna + linha" (exemplo: a2 b7).
 		
+		
+		Classe PartidaDeXadrez:
+		Nessa classe é a uma das principais para o progroma acontecer:
+			= ele tem os atributos:
+				- Board board
+				- int turno
+				- Cor jogadorVez
+				- Boolean check
+				- boolean checkMate
+				- PeçaDeXadrez enPassantVulneravel
+				- PeçaDeXadrez promoçao
+
+			= Ele tem as listas:
+				- peçasDoTabuleiro : Essa lista controla as peças que estão no tabuleiro
+				- peçasCapturadas: Essa lista controla as peças que foram capturadas.
+			= Ele tem o construtor PartidaDeXadrez que inicia:
+				- Mostrando o tabuleiro (8,8)
+				- Começando com o turno = 1 (primeira jogada de cada jogador)
+				- falando quem é o primeiro que começa a jogar (JogadorVez = branco)
+				- Inicando o setup = colocando as peças distribuidas de maneira certa.
+			= Ele tem todos os gets dos atributos.
+
+			= Ele tem um metodo chamado "getPeças" que rettorna uma matriz que representa o esttado atual de todas as peças de xadrez no tabuleiro.
+					== PeçaDeXadrez[][] mat = new PeçaDeXadrez[board.getLinhas()][board.getColunas()]:
+						- Cria uma nova matriz "mat" com o mesmo tamanho do tabuleiro em que o jogo esta sendo jogado.
+					== for (int i = 0; i < board.getLinhas(); i++):
+						- Itera sobre as linhas do tabuleiro.
+					== for (int j = 0; j < board.getColunas(); j++):
+						- Itera sobre as colunas do tabuleiro.
